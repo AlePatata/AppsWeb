@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Menú{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h2>Menú</h2>
+        <table class="menu">
+            <tr> <th><a id="e1" class= "link" href="{{ url_for('agregar_donacion') }}" 
+                onmouseenter="overSomething('e1')"
+                onmouseleave="leaveSomething('e1')"> Agregar Donación </a></th> </tr>
+            <tr> <th><a id="e2" class= "link" href="{{ url_for('ver_dispositivos') }}" 
+                onmouseenter="overSomething('e2')"
+                onmouseleave="leaveSomething('e2')"> Ver Dispositivos </a></th> </tr>
+            <tr> <th><a id="e3" class= "link" href="{{ url_for('grafico_comuna') }}"> Gráfico de Contactos por Comuna </a></th> </tr>
+            <tr> <th><a id="e4" class= "link" href="{{ url_for('grafico_tipos') }}"> Gráfico de Tipos </a></th> </tr>
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        const overSomething = (elementId) => {
+            var element = document.getElementById(elementId);
+            element.style.backgroundColor = "var(--ddpurple)";
+        }
+
+        const leaveSomething = (elementId) => {
+            var element = document.getElementById(elementId);
+            element.style = "menu";
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,6 @@
+venv
+__pycache__
+tarea2
+assets
+.vscode
+utils\__pycache__

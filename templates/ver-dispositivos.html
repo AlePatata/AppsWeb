@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title%}Document{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ver-dispositivos.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>VER DISPOSITIVOS</h1>
+
+    <table class="table" id="table">
+        <thead>
+          <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Nombre Dispositivo</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Comuna</th>
+            <th scope="col">Fotos</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+            {% for dispositivo in dispositivos %}
+                <tr id ="{{ dispositivo[4] }}" tipo="{{ dispositivo[1] }}" nombre="{{ dispositivo[2] }}" estado="{{ dispositivo[3] }}" comuna="{{ dispositivo[4]}}" imagen="{{ dispositivo[5].path_image }}">
+                    <!-- 0=tipo, 1=nombre, 2=estado, 3=comuna, 4=id, 5=path_img -->
+                    <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[0] }} </a></td>
+                    <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[1] }} </a></td>
+                    <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[2] }} </a></td>
+                    <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[3] }} </a></td>
+                    <td> <div class="photo">
+                        <img class="mini" src="{{ dispositivo[5].path_image }}" alt="Foto 1"> 
+                    </div></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+    <button class="button" type="button" id="menuButton">Volver al Menú Principal</button>
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        const informacionDispositivoUrl = "{{ url_for('informacion_dispositivo', dispositivo_id=0) }}"; // Deja dispositivo_id vacío
+    </script>
+        
+    <script src={{url_for('static',filename='js/base.js')}}></script>
+    <script src={{url_for('static',filename='js/ver-dispositivos.js')}}></script>
+{% endblock %}

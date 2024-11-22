@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Donación{% endblock %}
+    
+{% block css %}
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='css/agregar-donacion.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Agregar Donación</h1>
+
+    <div class="main-container">
+        
+        <form id="form-donacion" enctype="multipart/form-data" action="{{ url_for('agregar_donacion')}}" method="POST" >
+            <h2>Completa con tu información</h2>
+        
+            <label >Nombre:</label> 
+            <input class="field" type="nombre" name="nombre" id="nombre" required><br>
+
+            <label >Email:</label>
+            <input class="field" type="email" name="email" id="email" required><br>
+        
+            <label >Número celular:</label>
+            <input class="field" type="text" name="celular" id="celular"><br>
+        
+            <label >Región: </label>
+            <select class="select" name="region" id="region" required>
+                <option value=""> Selecciona una región </option>
+                {% for region in regiones %} 
+                    <option value={{region[0]}}> {{region[1]}} </option>
+                {% endfor %}
+            </select><br>
+
+            <label >Comuna:</label>
+            <select class="select" name="comuna" id="comuna" required>
+                <option value=""> Selecciona una comuna </option>
+                {% for comuna in comunas %} 
+                    <option value={{comuna[0]}}> {{comuna[1]}} </option>
+                {% endfor %}
+            </select><br>
+            
+            <h2>Información del Dispositivo</h2>
+            <div id="deviceList">
+                <div id="deviceContainer" class="deviceContainer">
+                    <label >Nombre del dispositivo:</label>
+                    <input id="dnombre[]" class="field" type="text" name="dnombre[]" required><br>
+
+                    <label >Descripción:</label>
+                    <input id="description[]" class="field" type="text" name="description[]" ><br>
+
+                    <label >Tipo de dispositivo: </label>
+                    <select id="tipo" class="select" name="tipo[]" required>
+                        <option value="" disabled selected> Selecciona un tipo </option>
+                    </select><br>
+
+                    <label >Años de uso:</label>
+                    <input id="anos_uso[]" class="field" type="text" name="anos_uso[]" required><br>
+
+                    <label >Estado de Funcionamiento: </label>
+                    <select id="estado" class="select" name="estado[]" required>
+                        <option value="" disabled selected> Selecciona un tipo </option>
+                    </select><br>
+
+                    <label >Imágenes</label>
+                    <div id="files" class="file-container">
+                        <input class="field" type="file" id="addFile" name="files[]" multiple accept="image/png, image/jpg, image/gif, image/jpeg" required><br>
+                    </div>  
+                    
+                    <hr class="degradao">
+                </div>
+            </div>
+            <button class="button" type="button" id="addDeviceButton">Agregar otro dispositivo</button>
+            <button class="button" type="button" id="removeDeviceButton">Eliminar dispositivo</button>
+            <button class="button" type="button" id ="submit-button"> Enviar </button>
+        </form>  
+
+        <div class="popup" id="popup" hidden>
+            <h2 id="popup-msg"></h2>
+            <ul id="popup-lista"></ul>
+            <button class="button" id="b1"> Volver </button>
+            <button class="button" id="b2"> Enviar </button>
+        </div>
+    </div>
+    <button class="button" type="button" id="menuButton">Volver al Menú Principal</button>
+    
+{% endblock content %}
+
+{% block javascript %}    
+    <script>
+        window.regiones = {{ regiones | tojson }};
+        window.comunas = {{ comunas | tojson }};
+    </script>
+    <script src={{ url_for('static', filename='js/base.js') }}></script>
+    <script src={{ url_for('static', filename='js/validation.js')}}></script>
+    <script src={{ url_for('static', filename='js/select.js') }}></script>
+    <script src={{ url_for('static', filename='js/new-device.js') }}></script>
+
+{% endblock %}

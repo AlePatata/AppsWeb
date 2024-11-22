@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Información Dispositivo{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion-dispositivo.css') }}">
+{% endblock %}
+    
+{% block content %}
+    <div class="dispositivo">
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th>Tipo:</th>
+                <td>{{dispositivo[0][0]}}</td>
+            </tr>
+            <tr>
+                <th>Nombre:</th>
+                <td>{{dispositivo[1][0]}}</td>
+            </tr>
+            <tr>
+                <th>Estado:</th>
+                <td>{{dispositivo[2][0]}}</td>
+            </tr>
+            <tr>
+                <th>Comuna:</th>
+                <td>{{dispositivo[3][0]}}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <div class="imagenes">
+        <h2>Imágenes</h2>
+        <div class="photo">
+            <img id="photo" src="{{ dispositivo[4] }}" alt="Foto 1">
+        </div>
+    </div>
+    <div class="comentarios" id="seccion-comentarios">
+        <h2>Comentarios</h2>
+        <ul id="lista_comentarios">
+            {% for comentario in comentarios %}
+                <h4>{{comentario[1]}}</h4>
+                <p>{{comentario[2]}}</p>
+            {% endfor %}
+        </ul>
+    </div>
+        <h3>Agregar un nuevo comentario</h3>
+        <form id="form_comentarios" action="{{ url_for('informacion_dispositivo', dispositivo_id=dispositivo_id) }}" method="POST">
+
+            <label>Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="80"> <br><br>
+
+            <label>Comentario:</label>
+            <textarea id="texto" name="texto" rows="4" cols="50" required minlength="5"></textarea> <br><br>
+
+            <input id="comentar" name="comentar" type="submit" value=" Agregar comentario " class="button"></input>
+        </form>
+
+        <div class="popup" id="popup" hidden>
+            <ul id="popup-lista">
+            </ul>
+        </div>
+
+        <p id="message"></p>
+    </div>
+
+    <button class="button" type="button" id="menuButton">Volver al Menú Principal</button>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validate-comment.js') }}"></script>
+{% endblock %}
