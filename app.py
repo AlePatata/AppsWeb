@@ -31,17 +31,17 @@ def agregar_donacion():
         region = request.form['region']
         comuna = request.form['comuna']
 
-
-        nombres_dispositivos = request.form.getlist('dnombre[]')
+    
+        nombres_dispositivos = request.form.getlist('dnombre')
         print(nombres_dispositivos)
-        descripciones = request.form.getlist('description[]')
-        tipos_dispositivos = request.form.getlist('tipo[]')
-        anos_uso = request.form.getlist('anos_uso[]')
-        estados_dispositivos = request.form.getlist('estado[]')
-        archivos = []  
+        descripciones = request.form.getlist('description')
+        tipos_dispositivos = request.form.getlist('tipo')
+        anos_uso = request.form.getlist('anos_uso')
+        estados_dispositivos = request.form.getlist('estado')
         
-        for i in range(len(nombres_dispositivos)):
-            archivos.append(request.files.getlist('files[]'))
+        #archivos_subidos = request.files.getlist('files')
+        #archivos = [archivo for archivo in archivos_subidos if archivo.filename] 
+        archivos = []
         
         if validation(nombre, email, celular, region, comuna, nombres_dispositivos, descripciones, tipos_dispositivos, anos_uso, estados_dispositivos, archivos):
             db.insert_contacto(nombre, email, celular, comuna)
@@ -51,11 +51,13 @@ def agregar_donacion():
             for i in range(len(nombres_dispositivos)):
                 db.insert_dispositivo(contacto_id, nombres_dispositivos[i], descripciones[i], tipos_dispositivos[i], anos_uso[i], estados_dispositivos[i])
                 dispositivo_id = db.get_last_dispositivo_id()
-                
-                for j in range(len(archivos[i])):
-                    print(archivos[i][j])
-                    file = archivos[i][j]
-                    agregar_file(file, dispositivo_id)
+                '''
+                for j in range(len(archivos)):
+                    print(archivos[i])
+                    file = archivos[i]
+                    if file:
+                        agregar_file(file, dispositivo_id)
+                '''
         else:
             error = 'Error en los datos ingresados'
         
@@ -91,11 +93,13 @@ def ver_dispositivos():
             comuna = db.get_comuna_by_contacto(contactos_id)
             dispositivo.append(comuna[0]) # Comuna
             dispositivo.append(dispositivos[i][0]) # ID
-            archivos = db.get_archivos(dispositivos[i][0])
-            print(archivos[1])
+            #archivos = db.get_archivos(dispositivos[i][0])
             dispositivo.append({
-                "path_image": url_for('static', filename='/uploads/'+archivos[1]),
+                "path_image": url_for('static', filename='uploads/shrek.jpg'),
             })
+            dispositivo.append(dispositivos[i][7]) # Likes
+            dispositivo.append(dispositivos[i][8]) # Dislikes
+             
             
             clean_dispositivos.append(dispositivo)
         

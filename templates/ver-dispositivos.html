@@ -17,6 +17,8 @@
             <th scope="col">Estado</th>
             <th scope="col">Comuna</th>
             <th scope="col">Fotos</th>
+            <th scope="col">Likes</th>
+            <th scope="col">Dislikes</th>
           </tr>
         </thead>
         
@@ -28,9 +30,15 @@
                     <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[1] }} </a></td>
                     <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[2] }} </a></td>
                     <td> <a class="text" href="{{ url_for('informacion_dispositivo', dispositivo_id = dispositivo[4]) }}"> {{ dispositivo[3] }} </a></td>
-                    <td> <div class="photo">
-                        <img class="mini" src="{{ dispositivo[5].path_image }}" alt="Foto 1"> 
-                    </div></td>
+                    <td> 
+                        <!--
+                        <div class="photo">
+                            <img class="mini" src="{{ dispositivo[5].path_image }}" alt="Foto 1"> 
+                        </div>
+                        -->
+                    </td>
+                    <td> <a class="text" href=""> 👍 {{dispositivo[6]}} </a></td>
+                    <td> <a class="text" href=""> 👎 {{dispositivo[7]}} </a></td>
                 </tr>
             {% endfor %}
         </tbody>

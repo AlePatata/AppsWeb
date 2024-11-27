@@ -53,8 +53,8 @@ const new_image = (event) => {
   let newFileInput = document.createElement("input");
   newFileInput.className = "field";
   newFileInput.type = 'file';
-  newFileInput.id = "addFile";
-  newFileInput.name = 'files[]';
+  newFileInput.id = "file";
+  newFileInput.name = 'files';
   newFileInput.accept = "image/png, image/jpg, image/gif, image/jpeg";
 
   newFileInput.addEventListener("change", new_image);
@@ -65,7 +65,7 @@ const new_image = (event) => {
 
  
 document.getElementById("region").addEventListener("change", updateComunas);
-document.getElementById("addFile").addEventListener("change", new_image);
+//document.getElementById("file").addEventListener("change", new_image);
 
 window.onload = () => {
   tipo_select();

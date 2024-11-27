@@ -42,31 +42,31 @@
             
             <h2>Información del Dispositivo</h2>
             <div id="deviceList">
-                <div id="deviceContainer" class="deviceContainer">
+                <div id="deviceContainer" class=".device">
                     <label >Nombre del dispositivo:</label>
-                    <input id="dnombre[]" class="field" type="text" name="dnombre[]" required><br>
+                    <input id="dnombre" class="field" type="text" name="dnombre" required><br>
 
                     <label >Descripción:</label>
-                    <input id="description[]" class="field" type="text" name="description[]" ><br>
+                    <input id="description" class="field" type="text" name="description" ><br>
 
                     <label >Tipo de dispositivo: </label>
-                    <select id="tipo" class="select" name="tipo[]" required>
+                    <select id="tipo" class="select" name="tipo" required>
                         <option value="" disabled selected> Selecciona un tipo </option>
                     </select><br>
 
                     <label >Años de uso:</label>
-                    <input id="anos_uso[]" class="field" type="text" name="anos_uso[]" required><br>
+                    <input id="anos_uso" class="field" type="text" name="anos_uso" required><br>
 
                     <label >Estado de Funcionamiento: </label>
-                    <select id="estado" class="select" name="estado[]" required>
+                    <select id="estado" class="select" name="estado" required>
                         <option value="" disabled selected> Selecciona un tipo </option>
                     </select><br>
-
+                    <!--
                     <label >Imágenes</label>
                     <div id="files" class="file-container">
-                        <input class="field" type="file" id="addFile" name="files[]" multiple accept="image/png, image/jpg, image/gif, image/jpeg" required><br>
+                        <input class="field" type="file" id="file" name="files" multiple accept="image/png, image/jpg, image/gif, image/jpeg" required><br>
                     </div>  
-                    
+                    -->
                     <hr class="degradao">
                 </div>
             </div>
@@ -91,6 +91,7 @@
         window.regiones = {{ regiones | tojson }};
         window.comunas = {{ comunas | tojson }};
     </script>
+    <script src={{ url_for('static', filename='js/form-handler.js')}}></script>
     <script src={{ url_for('static', filename='js/base.js') }}></script>
     <script src={{ url_for('static', filename='js/validation.js')}}></script>
     <script src={{ url_for('static', filename='js/select.js') }}></script>

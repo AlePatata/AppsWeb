@@ -107,10 +107,10 @@ const validateForm = () => {
   if (devices) {
     let deviceNumber = 1;
     devices.forEach((device) => {
-      let dnombre = device.querySelector('input[name="dnombre[]"]').value;
-      let deviceType = device.querySelector('select[name="tipo[]"]').value;
-      let yearsOfUse = device.querySelector('input[name="anos_uso[]"]').value;
-      let state = device.querySelector('select[name="estado[]"]').value;
+      let dnombre = device.querySelector('input[name="dnombre"]').value;
+      let deviceType = device.querySelector('select[name="tipo"]').value;
+      let yearsOfUse = device.querySelector('input[name="anos_uso"]').value;
+      let state = device.querySelector('select[name="estado"]').value;
       let imgs = device.querySelectorAll('input[type="file"]');
       
       let archivos = [];

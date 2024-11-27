@@ -83,10 +83,12 @@ def validate_estado(dispositivos):
 def validate_files(files):
     if not files:
         return False
+    i = 0
     for file in files:
         ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
         ALLOWED_MIMETYPES = {"image/jpeg", "image/png", "image/gif"}
-        
+        print("Validating file", i)
+        i += 1
         if not file:
             return False
         if file.name == "":
@@ -98,23 +100,6 @@ def validate_files(files):
             return False
     return True
 
-'''
-def validate_img(imagen):
-    ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
-    ALLOWED_MIMETYPES = {"image/jpeg", "image/png", "image/gif"}
-    if imagen is None:
-        return False
-    
-    if imagen.filename == "":
-        return False
-    ftype_guess = filetype.guess(imagen)
-    if ftype_guess.extension not in ALLOWED_EXTENSIONS:
-        return False
-    
-    if ftype_guess.mime not in ALLOWED_MIMETYPES:
-        return False
-    return True
-'''
 
 def validation(nombre, email, celular, region, comuna, dnombres, descripciones, tipo, anos_uso, estados, files):
     # CONTACTO
@@ -135,7 +120,6 @@ def validation(nombre, email, celular, region, comuna, dnombres, descripciones, 
         return False
     
     # DISPOSITIVOS
-    
     if not validate_device_nombre(dnombres):
         return False
     if descripciones:
@@ -151,8 +135,9 @@ def validation(nombre, email, celular, region, comuna, dnombres, descripciones, 
     if not validate_estado(estados):
         print("Estado de dispositivo invalido")
         return False
-    for i in range(len(files)):
-        if not validate_files(files[i]):
-            print("Archivos invalidos")
-            return False
+    if files:
+        for i in range(len(files)):
+            if not validate_files(files[i]):
+                print("Archivos invalidos")
+                return False
     return True
